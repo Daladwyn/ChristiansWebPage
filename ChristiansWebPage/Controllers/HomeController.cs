@@ -17,10 +17,6 @@ namespace ChristiansWebPage.Controllers
             model.LastName = "Levin";
             
 
-            //ViewBag.Message("Here is the Curiculum Vitae of Christian:");
-            //ViewBag.Message("Jobb experience:");
-            //ViewBag.Message("Education:");
-            //ViewBag.Message("Courses:");
             return View(model);
         }
 
@@ -35,13 +31,7 @@ namespace ChristiansWebPage.Controllers
         public ActionResult Projects()
         {
             ViewBag.Message("Here is the collection of projects that Christian have created:");
-            //ViewBag.Message("CommandoPromt Calculator");
-            //ViewBag.Message("CommandoPromt Golf Game");
-            //ViewBag.Message("CommandoPromt ArenaFighter");
-            //ViewBag.Message("Christians Simple Homepage");
-            //ViewBag.Message("Christians homepage with Bootstrap");
-            //ViewBag.Message("Christians Sokuban Game");
-            //ViewBag.Message("Christian have dabbled in other programming languages aswell including: Assembler, (Turbo)Pascal, C, C++, and PLC.");
+            
             return View();
         }      
 
