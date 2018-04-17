@@ -9,38 +9,42 @@ namespace ChristiansWebPage.Controllers
 {
     public class HomeController : Controller
     {
+        // Get Home
+        public ActionResult Index()
+        {
+
+            return View();
+        }
+
         // Get to About section
         public ActionResult About()
         {
-            var model = new AboutModel();
-            model.FirstName = "Christian";
-            model.LastName = "Levin";
-            
-
-            return View(model);
+            //var model = new AboutModel();
+            //model.ObjectName = "Support-Tekniker";
+            //model.ObjectDescription = "Working in a support management environment as a first contact support-technician.";
+            //return View(model);
+            return Content("aboutPage");
         }
 
         // Get to Contact section
         public ActionResult Contact()
         {
-            ViewBag.Message("Here is the contact details to Christian:");
-            return View();
+            //ViewBag.Message("Here is the contact details to Christian:");
+            //return View();
+            return Content("Contact page");
         }
 
         //Get to Projects section
         public ActionResult Projects()
         {
-            ViewBag.Message("Here is the collection of projects that Christian have created:");
-            
-            return View();
+            //ViewBag.Message("Here is the collection of projects that Christian have created:");
+
+            //return View();
+            return Content("projects Page");
         }      
 
 
-        // GET: Home
-        public ActionResult Index()
-        {
-            return View();
-        }
+       
 
         // GET: Home/Details/5
         public ActionResult Details(int id)
