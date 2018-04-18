@@ -1,12 +1,13 @@
-﻿<div class="navbar <!--navbar-inverse--> navbar-fixed-top">
-    <div class="container">
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <div class="navbar-toggle" <!--data-toggle="collapse" data-target=".navbar-collapse"-->>
-                <span class="icon-bar">@Html.ActionLink("Home", "Index", "Home")</span>
-                <span class="icon-bar">@Html.ActionLink("About", "About", "Home")</span>
-                <span class="icon-bar">@Html.ActionLink("Contact", "Contact", "Home")</span>
-                <span class="icon-bar">@Html.ActionLink("Projects", "Projects", "Home")</span>
-            </div>
+            <ul class="nav navbar-nav">
+                <li class="class="navbar-brand"><img src="~/Content/greenFlag.jpg" /></li>
+                <li class="nav">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="nav" >@Html.ActionLink("About", "About", "Home")</li>
+                <li class="nav" >@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li class="nav" >@Html.ActionLink("Projects", "Projects", "Home")</li>
+            </ul>
             <!--@Html.ActionLink("About", "Contact", "Projects", new { area = "" }, new { @class = "navbar-brand" }) -->
         </div>
         <div class="navbar-collapse collapse">

@@ -23,15 +23,15 @@ namespace ChristiansWebPage.Controllers
             //model.ObjectName = "Support-Tekniker";
             //model.ObjectDescription = "Working in a support management environment as a first contact support-technician.";
             //return View(model);
-            return Content("aboutPage");
+            return View();
         }
 
         // Get to Contact section
         public ActionResult Contact()
         {
             //ViewBag.Message("Here is the contact details to Christian:");
-            //return View();
-            return Content("Contact page");
+            return View();
+            //return Content("Contact page");
         }
 
         //Get to Projects section
@@ -39,8 +39,8 @@ namespace ChristiansWebPage.Controllers
         {
             //ViewBag.Message("Here is the collection of projects that Christian have created:");
 
-            //return View();
-            return Content("projects Page");
+            return View();
+            //return Content("projects Page");
         }      
 
 

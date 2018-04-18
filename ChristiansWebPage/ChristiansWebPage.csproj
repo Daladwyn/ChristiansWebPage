@@ -142,6 +142,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Contact\" />
+    <Folder Include="Views\External\" />
     <Folder Include="Views\Projects\" />
   </ItemGroup>
   <PropertyGroup>

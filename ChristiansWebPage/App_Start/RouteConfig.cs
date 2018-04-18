@@ -12,7 +12,7 @@ namespace ChristiansWebPage
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+                               
             // /home/about
             routes.MapRoute("About",
                 "About/{name}",
