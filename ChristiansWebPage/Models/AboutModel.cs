@@ -7,15 +7,15 @@ namespace ChristiansWebPage.Models
 {
     public class AboutModel
     {
-        public int AboutObjectID { get; set; }
-        public string ObjectType { get; set; }
-        public string ObjectName { get; set; }
-        public string ObjectDescription { get; set; }
-        public int StartYear { get; set; }
-        public int StartMonth { get; set; }
-        public int StartDay { get; set; }
-        public int EndYear { get; set; }
-        public int EndMonth { get; set; }
-        public int EndDay { get; set; }
+        public int CvId { get; set; }
+        public string CvType { get; set; }
+        public string CvName { get; set; }
+        public string CvDescription { get; set; }
+        public int CvStartYear { get; set; }
+        public int CvStartMonth { get; set; }
+        public int CvStartDay { get; set; }
+        public int CvEndYear { get; set; }
+        public int CvEndMonth { get; set; }
+        public int CvEndDay { get; set; }
     }
 }

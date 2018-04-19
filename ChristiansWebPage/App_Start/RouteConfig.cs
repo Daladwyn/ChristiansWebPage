@@ -28,6 +28,11 @@ namespace ChristiansWebPage
                 "Projects/{name}",
                 new { controller = "Home", action = "Projects", name = UrlParameter.Optional });
 
+            // Home/HealthCheck
+            routes.MapRoute("HealthCheck",
+                "HealthCheck/{BodyTemperature}",
+                new { controller = "Home", action = "HealthCheck", BodyTemperature = UrlParameter.Optional });
+
             // /home/index
             routes.MapRoute(
             name: "Default",
