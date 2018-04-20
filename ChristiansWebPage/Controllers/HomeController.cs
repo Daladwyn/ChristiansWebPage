@@ -9,6 +9,12 @@ namespace ChristiansWebPage.Controllers
 {
     public class HomeController : Controller
     {
+        // Get GuessingGame
+        public ActionResult GuessingGame()
+        {
+            return View();
+        }
+
         // Get Home
         public ActionResult Index()
         {
