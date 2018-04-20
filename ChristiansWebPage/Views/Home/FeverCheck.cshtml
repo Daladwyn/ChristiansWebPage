@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "HealthCheck";
+}
+
+<h2>HealthCheck</h2>
+
+<div>
+    <p>In order to see if you are unwell we need to know what your temperature is:</p>
+    <form method="post">
+        What temperature do you have: <input type="text" name="BodyTemperature" />
+
+        <input type="submit" value="Send" />
+    </form>
+
+</div>
+<div>
+    @ViewBag.Message
+    @ViewBag.ErrorMessage
+   
+</div>

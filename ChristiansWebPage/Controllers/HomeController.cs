@@ -34,40 +34,36 @@ namespace ChristiansWebPage.Controllers
         }
 
         //Get healthcheck section
-        [HttpGet]
-        public ActionResult Healthcheck()
+        public ActionResult FeverCheck()
         {
+            ViewBag.Message = "";
             return View();
         }
 
         [HttpPost]
-        public ActionResult Healthcheck(string BodyTemperature)
+        public ActionResult FeverCheck(string BodyTemperature)
         {
-            return RedirectToAction(CheckTemperature(BodyTemperature));
-        }
-
-
-        //checking the recieved temperature
-        private string CheckTemperature(string BodyTemperature)
-        {
-            var medicalCheck = new CheckTemperatureModel();
-            medicalCheck.recivedTemperature = Convert.ToDouble(Server.HtmlEncode(BodyTemperature));
-            //string healthStatus = "";
-            string ViewName = "CheckTemperature";
-
-            if (medicalCheck.recivedTemperature > 38)
+            bool validTemperature = true;
+            ViewBag.Message = "";
+            var medicalCheck = new CheckTemperature();
+            try
             {
-                ViewBag.Message = "You are feverish! ";
+                medicalCheck.recivedTemperature = Convert.ToDouble(Server.HtmlEncode(BodyTemperature));
             }
-            else
+            catch (FormatException)
             {
-                ViewBag.Message = "You are not feverish!";
+                ViewBag.ErrorMessage = "You did not enter a value that can be checked. Please try again.";
+                ViewBag.Message = "";
+                validTemperature = false;
             }
-            ViewBag.Message = "sick";
-            //return Content(ViewBag);
-            return View(ViewName, ViewBag);
-              //  medicalCheck);
-            //return (BodyTemperature);
+            if (validTemperature == true)
+            {
+                medicalCheck = CheckTemperature.TemperatureCheck(medicalCheck);
+                ViewBag.Message = medicalCheck.healthStatus;
+            }
+            medicalCheck.healthStatus = "";
+            validTemperature = true;
+            return View();
         }
 
     }
