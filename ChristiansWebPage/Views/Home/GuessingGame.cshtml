@@ -11,7 +11,15 @@
 </head>
 <body>
     <div>
-    
+        <p>Welcome to this guess a number game. The number you are looking for is between 0 and 100.</p>
+        <p>If you guess a wrong number you will be notified if you guessed low or high compared to the number.</p>
+        <p>Good Luck!!</p>
+        <form method="post">
+            what number are you guessing: <input type="text" name="GuessANumber" /> 
+            <input type="submit" value="Send" />
+
+        </form>
+        <p>@ViewBag.Result</p>
     </div>
 </body>
 </html>
