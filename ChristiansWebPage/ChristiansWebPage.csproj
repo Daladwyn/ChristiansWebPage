@@ -111,6 +111,7 @@
     <Compile Include="Models\AboutModel.cs" />
     <Compile Include="Models\CheckTemperatureModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\GuessingGameModel.cs" />
     <Compile Include="Models\ProjectsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -130,6 +131,7 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\FeverCheck.cshtml" />
+    <Content Include="Views\Home\GuessingGame.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

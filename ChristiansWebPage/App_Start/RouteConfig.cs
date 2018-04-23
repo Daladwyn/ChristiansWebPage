@@ -32,7 +32,10 @@ namespace ChristiansWebPage
             routes.MapRoute("FeverCheck",
                 "FeverCheck/{BodyTemperature}",
                 new { controller = "Home", action = "FeverCheck", BodyTemperature = UrlParameter.Optional });
-
+            // Home/GuessingGame
+            routes.MapRoute("GuessingGame",
+                "GuessingGame/{GuessANumber}",
+                new { controller = "Home", action = "GuessingGame", GuessANumber = UrlParameter.Optional });
             // /home/index
             routes.MapRoute(
             name: "Default",
