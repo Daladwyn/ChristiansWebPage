@@ -12,6 +12,7 @@ namespace ChristiansWebPage.Controllers
         // Get GuessingGame
         public ActionResult GuessingGame()
         {
+<<<<<<< HEAD
             Session["NumberToBeGuessed"] = GuessingGameModel.GenerateANumber();
             return View();
         }
@@ -56,6 +57,27 @@ namespace ChristiansWebPage.Controllers
             }
             listOfGuesses.Add(guessedNumber);
             Session["GuessedValues"] = listOfGuesses;
+=======
+            //create an array of a class that have numberOfGuesses and GuessANumber as fields
+            int NumberToBeGuessed;
+            Random generatedNumber = new Random();
+            NumberToBeGuessed = Convert.ToInt32(generatedNumber.Next(0, 100));  
+
+            ViewBag.Randomnumber = NumberToBeGuessed;
+            return View();
+        }
+
+        // Post GuessingGame 
+        [HttpPost]
+        public ActionResult GuessingGame(int GuessANumber)
+        {
+            //if (GuessANumber < Num )
+            //{
+
+            //}
+
+            //ViewBag.Result = 
+>>>>>>> 96b7a0b34d5f44d5274d9ed6c132f139418f2bae
             return View();
         }
 
@@ -115,6 +137,7 @@ namespace ChristiansWebPage.Controllers
             validTemperature = true;
             return View();
         }
+        
 
 
     }
