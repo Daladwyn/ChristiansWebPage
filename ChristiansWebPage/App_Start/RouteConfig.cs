@@ -36,6 +36,12 @@ namespace ChristiansWebPage
             routes.MapRoute("GuessingGame",
                 "GuessingGame/{GuessANumber}",
                 new { controller = "Home", action = "GuessingGame", GuessANumber = UrlParameter.Optional });
+            
+            // /home/percapita
+            routes.MapRoute("PerCapita",
+                "PerCapita/{id}",
+                new { controller = "PerCapita", action = "Index", id = UrlParameter.Optional });
+            
             // /home/index
             routes.MapRoute(
             name: "Default",

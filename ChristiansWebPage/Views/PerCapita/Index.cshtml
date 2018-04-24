@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ChristiansWebPage.Models.PerCapitaModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Random People</h2>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.MobilePhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Country)
+        </th>
+    </tr>
+@foreach (var item in Model)
+{ 
+
+<tr>
+    <td>
+        @Html.DisplayFor(Modelitem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(Modelitem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(Modelitem => item.MobilePhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(Modelitem => item.Country)
+    </td>
+
+</tr>
+
+
+}
+</table>

@@ -121,8 +121,5 @@ namespace ChristiansWebPage.Controllers
             validTemperature = true;
             return View();
         }
-
-
-
     }
 }

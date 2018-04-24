@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PerCapitaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -112,6 +113,7 @@
     <Compile Include="Models\CheckTemperatureModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\GuessingGameModel.cs" />
+    <Compile Include="Models\PerCapitaModel.cs" />
     <Compile Include="Models\ProjectsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,6 +134,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\FeverCheck.cshtml" />
     <Content Include="Views\Home\GuessingGame.cshtml" />
+    <Content Include="Views\PerCapita\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
