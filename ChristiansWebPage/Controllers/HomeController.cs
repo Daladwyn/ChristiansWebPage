@@ -12,21 +12,24 @@ namespace ChristiansWebPage.Controllers
         // Get GuessingGame
         public ActionResult GuessingGame()
         {
-<<<<<<< HEAD
-            Session["NumberToBeGuessed"] = GuessingGameModel.GenerateANumber();
+            Session["Restart"] = "no";
+            Session["NumberToBeGuessed"] = GuessingGameModel.GenerateANumber(); //Generate a Number
             return View();
         }
         // Post GuessingGame 
         [HttpPost]
         public ActionResult GuessingGame(string GuessANumber)
         {
+            //initialize variables and assign starting values
+            Session["Restart"] = "no";
             int preDeterminedNumber = 0;
             int guessedNumber = 0;
-            List<int> listOfGuesses = new List<int>();
+            List<int> listOfGuesses = new List<int>(); //Create a list to store guessed values
             preDeterminedNumber = Convert.ToInt32(Session["NumberToBeGuessed"]);
+            //Catch strange input from user
             try
             {
-                guessedNumber = Convert.ToInt32(GuessANumber);
+                guessedNumber = Convert.ToInt32(Server.HtmlEncode(GuessANumber));
             }
             catch (ArgumentException)
             {
@@ -36,6 +39,7 @@ namespace ChristiansWebPage.Controllers
             {
                 Session["Result"] = "You did type a strange number, try again!";
             }
+            //Evalute the input from the user
             if (guessedNumber < preDeterminedNumber)
             {
                 Session["Result"] = "Your guessed number was to low";
@@ -45,39 +49,19 @@ namespace ChristiansWebPage.Controllers
                 Session["Result"] = "Your guessed number was spot on!! Good Guess!";
                 Session["NumberToBeGuessed"] = GuessingGameModel.GenerateANumber();
                 listOfGuesses.Clear();
-                Session["GuessedValues"] = listOfGuesses;
+                Session["Restart"] = null;
             }
             else if (guessedNumber > preDeterminedNumber)
             {
                 Session["Result"] = "Your guessed number was to great";
             }
+            //Store the guessed value to the list
             if (Session["GuessedValues"] != null)
             {
                 listOfGuesses = (List<int>)Session["GuessedValues"];
             }
             listOfGuesses.Add(guessedNumber);
             Session["GuessedValues"] = listOfGuesses;
-=======
-            //create an array of a class that have numberOfGuesses and GuessANumber as fields
-            int NumberToBeGuessed;
-            Random generatedNumber = new Random();
-            NumberToBeGuessed = Convert.ToInt32(generatedNumber.Next(0, 100));  
-
-            ViewBag.Randomnumber = NumberToBeGuessed;
-            return View();
-        }
-
-        // Post GuessingGame 
-        [HttpPost]
-        public ActionResult GuessingGame(int GuessANumber)
-        {
-            //if (GuessANumber < Num )
-            //{
-
-            //}
-
-            //ViewBag.Result = 
->>>>>>> 96b7a0b34d5f44d5274d9ed6c132f139418f2bae
             return View();
         }
 
@@ -137,7 +121,7 @@ namespace ChristiansWebPage.Controllers
             validTemperature = true;
             return View();
         }
-        
+
 
 
     }

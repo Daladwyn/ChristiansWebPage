@@ -6,7 +6,10 @@ using System.Web;
 namespace ChristiansWebPage.Models
 {
     public class GuessingGameModel
-    {
+    {   /// <summary>
+        /// GenerateANumber creates a integer between 0 and 100.
+        /// </summary>
+        /// <returns></returns>
         static public int GenerateANumber()
         {
             int number = 0;
