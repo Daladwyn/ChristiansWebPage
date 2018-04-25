@@ -4,7 +4,7 @@
 }
 
 <h2>List of Random People</h2>
-<table>
+<table id="table">
     <tr>
         <th>
             @Html.DisplayNameFor(Model => Model.FirstName)
@@ -16,28 +16,56 @@
             @Html.DisplayNameFor(Model => Model.MobilePhoneNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(Model => Model.Country)
+            @Html.DisplayNameFor(Model => Model.Cities)
         </th>
     </tr>
-@foreach (var item in Model)
-{ 
+    @foreach (var item in Model)
+    {
 
-<tr>
-    <td>
-        @Html.DisplayFor(Modelitem => item.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(Modelitem => item.LastName)
-    </td>
-    <td>
-        @Html.DisplayFor(Modelitem => item.MobilePhoneNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(Modelitem => item.Country)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(Modelitem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(Modelitem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(Modelitem => item.MobilePhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(Modelitem => item.Cities)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeletePerCapita")
+            </td>
+        </tr>
 
-</tr>
 
-
-}
+    }
 </table>
+
+@Ajax.BeginForm("AddPerCapita", "PerCapita", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "table", InsertionMode = InsertionMode.InsertAfter, LoadingElementId = "waitimage" })
+<div>
+    Here you can add more persons:<br />
+    <table>
+        <tr>
+            <td> First name:</td>
+            <td> @Html.TextBox("FirstName")</td>
+        </tr>
+        <tr>
+            <td>Second name:</td>
+            <td> @Html.TextBox("LastName")</td>
+        </tr>
+        <tr>
+            <td>Mobile number:</td>
+            <td> @Html.TextBox("MobilePhoneNumber")</td>
+        <tr>
+            <td>City:</td>
+            <td> @Html.TextBox("Cities")</td>
+        </tr>
+        <tr>
+            <td> <input type="submit" value="Add" /></td>
+        </tr>
+    </table>
+</div>
+@{ Html.EndForm();}
