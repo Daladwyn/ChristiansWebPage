@@ -1,71 +1,74 @@
-﻿@model IEnumerable<ChristiansWebPage.Models.PerCapitaModel>
+﻿@model List<ChristiansWebPage.Models.PerCapitaModel>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>List of Random People</h2>
-<table id="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.MobilePhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.Cities)
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-
+<table>
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(Modelitem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(Modelitem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(Modelitem => item.MobilePhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(Modelitem => item.Cities)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "DeletePerCapita")
-            </td>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Mobile Number
+            </th>
+            <th>
+                City
+            </th>
         </tr>
-
-
-    }
+    </thead>
+    <tbody>
+        @foreach (ChristiansWebPage.Models.PerCapitaModel item in Model)
+        {
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(Modelitem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(Modelitem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(Modelitem => item.MobilePhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(Modelitem => item.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeletePerCapita", item.Id)
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
-@Ajax.BeginForm("AddPerCapita", "PerCapita", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "table", InsertionMode = InsertionMode.InsertAfter, LoadingElementId = "waitimage" })
-<div>
-    Here you can add more persons:<br />
+
+@using (Html.BeginForm("AddPerCapita", "PerCapita", FormMethod.Post))
+{
+    <h3>Here you can add more persons:</h3><br />
     <table>
         <tr>
             <td> First name:</td>
-            <td> @Html.TextBox("FirstName")</td>
+            <td> <input type="text" name="FirstName" value="" /></td>
         </tr>
         <tr>
             <td>Second name:</td>
-            <td> @Html.TextBox("LastName")</td>
+            <td> <input type="text" name="LastName" value="" /></td>
         </tr>
         <tr>
             <td>Mobile number:</td>
-            <td> @Html.TextBox("MobilePhoneNumber")</td>
+            <td> <input type="text" name="MobilePhoneNumber" value="" /></td>
         <tr>
             <td>City:</td>
-            <td> @Html.TextBox("Cities")</td>
+            <td> <input type="text" name="City" value="" /></td>
         </tr>
         <tr>
-            <td> <input type="submit" value="Add" /></td>
+            <td></td>
+            <td><input type="submit" value="Add" /></td>
         </tr>
     </table>
-</div>
-@{ Html.EndForm();}
+}
+@Session["WrongMobilenumber"]

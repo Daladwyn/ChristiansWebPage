@@ -39,7 +39,7 @@ namespace ChristiansWebPage
             
             // /home/percapita
             routes.MapRoute("PerCapita",
-                "PerCapita/{id}",
+                "PerCapita/{action}/{id}",
                 new { controller = "PerCapita", action = "Index", id = UrlParameter.Optional });
             
             // /home/index
