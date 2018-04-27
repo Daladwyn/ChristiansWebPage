@@ -12,3 +12,10 @@ textarea {
     max-width: 280px;
 }
 
+#rightAlign{
+    display: block;
+}
+
+#leftAlign{
+    display : inline;
+}

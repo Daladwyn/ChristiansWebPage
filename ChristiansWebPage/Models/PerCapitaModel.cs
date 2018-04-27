@@ -47,9 +47,46 @@ namespace ChristiansWebPage.Models
 
         public static List<PerCapitaModel> peopleList = new List<PerCapitaModel>() { ppl1, ppl2, ppl3, ppl4, ppl5, ppl6, ppl7, ppl8, ppl9, ppl10, ppl11, ppl12, ppl13, ppl14, ppl15, ppl16, ppl17, ppl18 };
 
-        //public List<PerCapitaModel> DeleteFromPerCapita(int Id)
-        //{
-        //    return peopleList;
-        //}
+        public static List<PerCapitaModel> FilterAPeopleList(string searchString)
+        {
+            List<PerCapitaModel> newPeopleList = new List<PerCapitaModel>();
+            for (int i = 0; i < peopleList.Count; i++)
+            {
+                searchString = searchString.ToLower();
+                if (peopleList[i].FirstName.ToLower() == searchString)
+                {
+                    newPeopleList.Add(peopleList[i]);
+                }
+                else if(peopleList[i].LastName.ToLower() == searchString)
+                {
+                    newPeopleList.Add(peopleList[i]);
+                }
+                else if(peopleList[i].City.ToLower() == searchString)
+                {
+                    newPeopleList.Add(peopleList[i]);
+                }else if(searchString == "")
+                {
+                    newPeopleList = peopleList;
+                }
+            }
+            return newPeopleList;
+        }
+
+        public static List<PerCapitaModel> SortAPeopleListOnFirstName()
+        {
+            peopleList.Sort((x, y) => x.FirstName.CompareTo(y.FirstName));
+            return peopleList;
+        }
+        public static List<PerCapitaModel> SortAPeopleListOnLastName()
+        {
+            peopleList.Sort((x, y) => x.LastName.CompareTo(y.LastName));
+            return peopleList;
+        }
+        public static List<PerCapitaModel> SortAPeopleListOnCity()
+        {
+            peopleList.Sort((x, y) => x.City.CompareTo(y.City));
+            return peopleList;
+        }
+
     }
 }

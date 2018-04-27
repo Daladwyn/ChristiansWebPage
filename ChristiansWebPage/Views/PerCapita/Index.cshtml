@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>List of Random People</h2>
 <table>
     <thead>
@@ -38,17 +37,39 @@
                     @Html.DisplayFor(Modelitem => item.City)
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "DeletePerCapita", item.Id)
+                    @{var routeValue = new RouteValueDictionary();
+                        routeValue.Add("id", item.Id);}
+                    @Html.ActionLink("Delete", "DeletePerCapita", routeValue)
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-
+@using (Html.BeginForm("SortAPeopleList", "PerCapita", FormMethod.Post))
+{
+    <h3>What would you like to sort on:</h3><br />
+    <select name="sortOnColumn" size="1">
+        <option value="FirstName">First name</option>
+        <option value="LastName">Last name</option>
+        <option value="City">City</option>
+    </select>
+    <input type="submit" name="" value="Sort" />
+}
+@using (Html.BeginForm("FilterPerCapita", "PerCapita", FormMethod.Post))
+{
+    <h3>What are you looking for:</h3><br />
+    <p>To remove the filter, search again without any word.</p>
+    <input type="text" name="searchFilter" value="" />
+    <input type="submit" name="" value="Search" />
+}
 @using (Html.BeginForm("AddPerCapita", "PerCapita", FormMethod.Post))
 {
     <h3>Here you can add more persons:</h3><br />
+    if (Convert.ToString(Session["WrongMobilenumber"]) != "")
+    {
+        <h1>@Session["WrongMobilenumber"]</h1><br />
+    }
     <table>
         <tr>
             <td> First name:</td>
@@ -71,4 +92,3 @@
         </tr>
     </table>
 }
-@Session["WrongMobilenumber"]
