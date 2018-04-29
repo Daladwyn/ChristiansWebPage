@@ -138,6 +138,7 @@
     <Content Include="Views\Home\GuessingGame.cshtml" />
     <Content Include="Views\PerCapita\Index.cshtml" />
     <Content Include="Views\PerCapitaByAjax\Index.cshtml" />
+    <Content Include="Views\PerCapitaByAjax\_TableRowOfPeople.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

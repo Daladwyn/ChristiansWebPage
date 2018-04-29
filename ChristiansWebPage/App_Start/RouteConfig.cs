@@ -44,7 +44,7 @@ namespace ChristiansWebPage
 
             // Home/percapita by Ajax
             routes.MapRoute("PerCapitaByAjax",
-                "PercapitaByAjax/{action}/{id}",
+                "PerCapitaByAjax/{action}/{id}",
                 new { controller = "PerCapitaByAjax", action = "Index", id = UrlParameter.Optional });
 
             // /home/index

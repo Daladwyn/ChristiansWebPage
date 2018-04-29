@@ -45,7 +45,7 @@ namespace ChristiansWebPage.Controllers
         //This action removes the corresponding object in the data
 
         [HttpGet]
-        public ActionResult DeletePerCapita(int id)
+        public ActionResult DeletePerCapitaByAjax(int id)
         {
             for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
             {
@@ -60,7 +60,7 @@ namespace ChristiansWebPage.Controllers
         }
 
         [HttpPost] //Add a person to existing list
-        public ActionResult AddPerCapita(string FirstName, string LastName, string MobilePhoneNumber, string City)
+        public ActionResult AddPerCapitaByAjax(string FirstName, string LastName, string MobilePhoneNumber, string City)
         {
             Session["WrongMobilenumber"] = "";
             PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
