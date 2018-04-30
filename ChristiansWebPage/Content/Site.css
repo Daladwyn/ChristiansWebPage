@@ -19,3 +19,8 @@ textarea {
 #leftAlign{
     display : inline;
 }
+
+li {
+    float: left;
+    padding: 16px;
+}

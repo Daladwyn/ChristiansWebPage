@@ -1,9 +1,27 @@
-﻿@model List<ChristiansWebPage.Models.PerCapitaByAjax>
+﻿@model ChristiansWebPage.Models.PerCapitaByAjax
 @{
     ViewBag.Title = "Index";
 }
 <h2>List of Random People</h2>
-<table>
+<ul>
+    <li>@Html.DisplayNameFor<Model => Model.FirstName></li>
+    <li>Last Name</li>
+    <li>Mobile Number</li>
+    <li>City</li>
+
+
+
+</ul>
+
+
+
+
+
+
+@* @<table>
+   
+    
+    
     <thead>
         <tr>
             <th>
@@ -43,9 +61,9 @@
 
                 </td>
             </tr>
-        }*@
+        }*
     </tbody>
-</table>
+</table> *@
 @using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))
 {
     <h3>What would you like to sort on:</h3><br />
