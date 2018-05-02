@@ -1,4 +1,10 @@
-﻿@Model ChristiansWebPage.Models
-@Using PerCapitaByAjax
-sdf
+﻿ @model List<ChristiansWebPage.Models.PerCapitaByAjax>
+
+@foreach (ChristiansWebPage.Models.PerCapitaByAjax item in Model) { 
+    <li id="@item.Id" id="firstName">@Html.DisplayFor(Modelitem => item.FirstName)</li>
+    <li id="lastName">@Html.DisplayFor(Modelitem => item.LastName)</li>
+    <li id="mobileNumber">@Html.DisplayFor(Modelitem => item.MobilePhoneNumber)</li>
+    <li id="city">@Html.DisplayFor(Modelitem => item.City)</li>
+    <li  class="rowBreak"></li>
+}
 

@@ -10,11 +10,11 @@ namespace ChristiansWebPage.Controllers
 {
     public class PerCapitaByAjaxController : Controller
     {
-       
-        // GET: PerCapita
+
+        // GET: PerCapitaByAjax
         public ActionResult Index()
         {
-            return View(PerCapitaByAjax.peopleList);
+            return View();
         }
 
         [HttpPost] //This action sorts the data based on which column to sort on
@@ -32,15 +32,20 @@ namespace ChristiansWebPage.Controllers
             {
                 PerCapitaByAjax.SortAPeopleListOnCity();
             }
-            return View("Index", PerCapitaByAjax.peopleList);
+            // return View("Index", PerCapitaByAjax.peopleList);
+
+            return View("Index");
+
         }
 
         [HttpPost]// This Action Filters out the entered text.
-        public ActionResult FilterPerCapita(string searchFilter)
+        public ActionResult FilterPerCapitaByAjax(string searchFilter)
         {
-            List<PerCapitaByAjax> FilteredPeopleList = new List<PerCapitaByAjax>();
-            FilteredPeopleList = PerCapitaByAjax.FilterAPeopleList(searchFilter);
-            return View("Index", FilteredPeopleList);
+            //List<PerCapitaByAjax> FilteredPeopleList = new List<PerCapitaByAjax>();
+            //FilteredPeopleList = PerCapitaByAjax.FilterAPeopleList(searchFilter);
+            PerCapitaByAjax.FilterAPeopleList(searchFilter);
+            return View("Index");
+            
         }
         //This action removes the corresponding object in the data
 
@@ -56,7 +61,8 @@ namespace ChristiansWebPage.Controllers
                     PerCapitaByAjax.peopleList.Remove(deleteAPerson);
                 }
             }
-            return View("Index", PerCapitaByAjax.peopleList);
+            return View("Index");
+
         }
 
         [HttpPost] //Add a person to existing list
@@ -74,7 +80,13 @@ namespace ChristiansWebPage.Controllers
             }
             AddAPerson.City = City;
             PerCapitaByAjax.peopleList.Add(AddAPerson);
-            return View("Index", PerCapitaByAjax.peopleList);
+            return View("Index");
+
+        }
+
+        public ActionResult PeopleRowRender()
+        {
+            return PartialView("_TableRowOfPeople", PerCapitaByAjax.peopleList);
         }
 
         /// <summary>

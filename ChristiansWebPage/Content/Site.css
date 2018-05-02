@@ -1,8 +1,7 @@
 ﻿
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding: 100px 15px 20px 15px;
- 
+    padding: 150px 15px 20px 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -12,15 +11,40 @@ textarea {
     max-width: 280px;
 }
 
-#rightAlign{
+#rightAlign {
     display: block;
 }
 
-#leftAlign{
-    display : inline;
+#leftAlign {
+    display: inline;
+}
+
+.rowBreak {
+    display: block;
+}
+
+#firstName {
+    min-width: 100px;
+}
+
+#lastName {
+    min-width: 100px;
+}
+
+#mobileNumber {
+    min-width: 200px;
+}
+
+#city {
+    min-width: 200px;
+}
+
+ul {
+    list-style-type: none;
 }
 
 li {
-    float: left;
-    padding: 16px;
+    padding: 5px;
+    display: inline;
+    border: 10px;
 }
