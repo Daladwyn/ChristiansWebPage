@@ -2,77 +2,69 @@
 @{
     ViewBag.Title = "Index";
 }
-<table>
-    <tr>
-        <td>
-            <h2>List of Random People</h2>
-            <ul>
-                <li id="firstName">@Html.DisplayNameFor(Modelitem => Modelitem.FirstName)</li>
-                <li id="lastName">@Html.DisplayNameFor(Modelitem => Model.LastName)</li>
-                <li id="mobileNumber">@Html.DisplayNameFor(Modelitem => Model.MobilePhoneNumber)</li>
-                <li id="city">@Html.DisplayNameFor(Modelitem => Model.City)</li>
-                <li class="rowBreak"></li>
 
-                @Html.Action("PeopleRowRender", "PerCapitaByAjax")
+<h2>List of Random People</h2>
+<ul>
+    <li id="firstName">@Html.DisplayNameFor(Modelitem => Modelitem.FirstName)</li>
+    <li id="lastName">@Html.DisplayNameFor(Modelitem => Model.LastName)</li>
+    <li id="mobileNumber">@Html.DisplayNameFor(Modelitem => Model.MobilePhoneNumber)</li>
+    <li id="city">@Html.DisplayNameFor(Modelitem => Model.City)</li>
+    <li class="rowBreak"></li>
 
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
+    @Html.Action("PeopleRowRender", "PerCapitaByAjax")
 
-            @using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))
-            {
-                <h3>What would you like to sort on:</h3>
-                <br />
-                <select name="sortOnColumn" size="1">
-                    <option value="FirstName">First name</option>
-                    <option value="LastName">Last name</option>
-                    <option value="City">City</option>
-                </select>
-                <input type="submit" name="" value="Sort" />
-            }
+</ul>
 
-            @using (Html.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
-            {
-                <h3>What are you looking for:</h3>
-                <br />
-                <p>To remove the filter, search again without any word.</p>
-                <input type="text" name="searchFilter" value="" />
-                <input type="submit" name="" value="Search" />
-            }
 
-            @using (Html.BeginForm("AddPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
-            {
-                <h3>Here you can add more persons:</h3>
-                <br />
-                if (Convert.ToString(Session["WrongMobilenumber"]) != "")
-                {
-                    <h1>@Session["WrongMobilenumber"]</h1>
-                    <br />
-                }
-                <table>
-                    <tr>
-                        <td> First name:</td>
-                        <td> <input type="text" name="FirstName" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Second name:</td>
-                        <td> <input type="text" name="LastName" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Mobile number:</td>
-                        <td> <input type="text" name="MobilePhoneNumber" value="" /></td>
-                    <tr>
-                        <td>City:</td>
-                        <td> <input type="text" name="City" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="submit" value="Add" /></td>
-                    </tr>
-                </table>
-            }
-            </td>
+@using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))
+{
+    <h3>What would you like to sort on:</h3>
+    <br />
+    <select name="sortOnColumn" size="1">
+        <option value="FirstName">First name</option>
+        <option value="LastName">Last name</option>
+        <option value="City">City</option>
+    </select>
+    <input type="submit" name="" value="Sort" />
+}
+
+@using (Html.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
+{
+    <h3>What are you looking for:</h3>
+    <br />
+    <p>To remove the filter, search again without any word.</p>
+    <input type="text" name="searchFilter" value="" />
+    <input type="submit" name="" value="Search" />
+}
+
+@using (Html.BeginForm("AddPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
+{
+    <h3>Here you can add more persons:</h3>
+    <br />
+    if (Convert.ToString(Session["WrongMobilenumber"]) != "")
+    {
+        <h1>@Session["WrongMobilenumber"]</h1>
+        <br />
+    }
+    <table>
+        <tr>
+            <td> First name:</td>
+            <td> <input type="text" name="FirstName" value="" /></td>
+        </tr>
+        <tr>
+            <td>Second name:</td>
+            <td> <input type="text" name="LastName" value="" /></td>
+        </tr>
+        <tr>
+            <td>Mobile number:</td>
+            <td> <input type="text" name="MobilePhoneNumber" value="" /></td>
+        <tr>
+            <td>City:</td>
+            <td> <input type="text" name="City" value="" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add" /></td>
         </tr>
     </table>
+}

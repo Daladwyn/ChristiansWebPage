@@ -24,19 +24,19 @@ textarea {
 }
 
 #firstName {
-    min-width: 100px;
+    max-width: 300px;
 }
 
 #lastName {
-    min-width: 100px;
+    max-width: 300px;
 }
 
 #mobileNumber {
-    min-width: 200px;
+    min-width: 400px;
 }
 
 #city {
-    min-width: 200px;
+    min-width: 400px;
 }
 
 ul {
@@ -47,4 +47,8 @@ li {
     padding: 5px;
     display: inline;
     border: 10px;
+}
+
+form{
+   /* float:right;*/
 }

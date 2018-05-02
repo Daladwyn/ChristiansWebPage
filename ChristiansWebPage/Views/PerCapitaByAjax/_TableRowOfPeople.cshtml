@@ -5,6 +5,13 @@
     <li id="lastName">@Html.DisplayFor(Modelitem => item.LastName)</li>
     <li id="mobileNumber">@Html.DisplayFor(Modelitem => item.MobilePhoneNumber)</li>
     <li id="city">@Html.DisplayFor(Modelitem => item.City)</li>
-    <li  class="rowBreak"></li>
+    <li>
+        @{var routeValue = new RouteValueDictionary();
+        routeValue.Add("id", item.Id);}
+        @Html.ActionLink("Delete", "DeletePerCapitaByAjax", routeValue)
+
+    </li>
+    <li class="rowBreak">
+    </li>
 }
 
