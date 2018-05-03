@@ -1,17 +1,19 @@
-﻿ @model List<ChristiansWebPage.Models.PerCapitaByAjax>
+﻿@model List<ChristiansWebPage.Models.PerCapitaByAjax>
 
-@foreach (ChristiansWebPage.Models.PerCapitaByAjax item in Model) { 
-    <li id="@item.Id" id="firstName">@Html.DisplayFor(Modelitem => item.FirstName)</li>
-    <li id="lastName">@Html.DisplayFor(Modelitem => item.LastName)</li>
-    <li id="mobileNumber">@Html.DisplayFor(Modelitem => item.MobilePhoneNumber)</li>
-    <li id="city">@Html.DisplayFor(Modelitem => item.City)</li>
-    <li>
+@foreach (ChristiansWebPage.Models.PerCapitaByAjax item in Model)
+{
+<li class="row"></li>
+    <li id="@item.Id" class="col-md-3">@Html.DisplayFor(Modelitem => item.FirstName)</li>
+    <li class="col-md-3">@Html.DisplayFor(Modelitem => item.LastName)</li>
+    <li class="col-md-2">@Html.DisplayFor(Modelitem => item.MobilePhoneNumber)</li>
+    <li class="col-md-2">@Html.DisplayFor(Modelitem => item.City)</li>
+    <li class="col-md-2">
         @{var routeValue = new RouteValueDictionary();
-        routeValue.Add("id", item.Id);}
+            routeValue.Add("id", item.Id);}
         @Html.ActionLink("Delete", "DeletePerCapitaByAjax", routeValue)
 
     </li>
-    <li class="rowBreak">
-    </li>
+    <li class="rowBreak"></li>
+    
 }
 

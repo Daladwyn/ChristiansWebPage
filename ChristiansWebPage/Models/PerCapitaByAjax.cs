@@ -13,8 +13,10 @@ namespace ChristiansWebPage.Models
 
         public int Id { get; set; }
 
+        [Required]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
+        [Required]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
         [Display(Name = "Mobile")]
@@ -95,5 +97,26 @@ namespace ChristiansWebPage.Models
             return peopleList;
         }
 
+        public static string CheckNameInput(string NameInput)
+        {
+            char input;
+            bool letter = false, number = false;
+            string checkedName = "";
+            for(int i =0; i < NameInput.Length; i++)
+            {
+                input = Convert.ToChar(NameInput[i]);
+                if(char.IsLetter(input))
+                {
+                    letter = true;
+                } else if(char.IsDigit(input))
+                {
+                    number = true;
+                }
+            }
+
+
+
+            return checkedName; 
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace ChristiansWebPage.Controllers
             //FilteredPeopleList = PerCapitaByAjax.FilterAPeopleList(searchFilter);
             PerCapitaByAjax.FilterAPeopleList(searchFilter);
             return View("Index");
-            
+
         }
         //This action removes the corresponding object in the data
 
@@ -68,20 +68,29 @@ namespace ChristiansWebPage.Controllers
         [HttpPost] //Add a person to existing list
         public ActionResult AddPerCapitaByAjax(string FirstName, string LastName, string MobilePhoneNumber, string City)
         {
-            Session["WrongMobilenumber"] = "";
-            PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
-            AddAPerson.FirstName = FirstName;
-            AddAPerson.LastName = LastName;
-            AddAPerson.MobilePhoneNumber = CheckMobilePhoneNumber(MobilePhoneNumber);
-            if (AddAPerson.MobilePhoneNumber == "Letters instead of Numbers")
-            {
-                Session["WrongMobilenumber"] = "You have typed a incorrect mobilenumber.";
-                AddAPerson.MobilePhoneNumber = "";
-            }
-            AddAPerson.City = City;
-            PerCapitaByAjax.peopleList.Add(AddAPerson);
-            return View("Index");
 
+            if (ModelState.IsValid)
+            {
+                Session["WrongMobilenumber"] = "";
+                PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
+                AddAPerson.FirstName = FirstName;
+                AddAPerson.LastName = LastName;
+                AddAPerson.MobilePhoneNumber = CheckMobilePhoneNumber(MobilePhoneNumber);
+                if (AddAPerson.MobilePhoneNumber == "Letters instead of Numbers")
+                {
+                    Session["WrongMobilenumber"] = "You have typed a incorrect mobilenumber.";
+                    AddAPerson.MobilePhoneNumber = "";
+                }
+                AddAPerson.City = City;
+
+                PerCapitaByAjax.peopleList.Add(AddAPerson);
+                return View("Index");
+            }
+            else
+            {
+                Session["WrongMobilenumber"] = "You have entered one or more incorrect details.";
+                return View("Index");
+            }
         }
 
         public ActionResult PeopleRowRender()

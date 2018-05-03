@@ -23,19 +23,19 @@ textarea {
     display: block;
 }
 
-#firstName {
+.firstName {
     max-width: 300px;
 }
 
-#lastName {
+.lastName {
     max-width: 300px;
 }
 
-#mobileNumber {
+.mobileNumber {
     min-width: 400px;
 }
 
-#city {
+.city {
     min-width: 400px;
 }
 
