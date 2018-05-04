@@ -32,23 +32,17 @@ namespace ChristiansWebPage.Controllers
             {
                 PerCapitaByAjax.SortAPeopleListOnCity();
             }
-            // return View("Index", PerCapitaByAjax.peopleList);
-
             return View("Index");
-
         }
 
         [HttpPost]// This Action Filters out the entered text.
         public ActionResult FilterPerCapitaByAjax(string searchFilter)
         {
-            //List<PerCapitaByAjax> FilteredPeopleList = new List<PerCapitaByAjax>();
-            //FilteredPeopleList = PerCapitaByAjax.FilterAPeopleList(searchFilter);
             PerCapitaByAjax.FilterAPeopleList(searchFilter);
             return View("Index");
-
         }
-        //This action removes the corresponding object in the data
 
+        //This action removes the corresponding object in the data
         [HttpGet]
         public ActionResult DeletePerCapitaByAjax(int id)
         {
@@ -62,33 +56,59 @@ namespace ChristiansWebPage.Controllers
                 }
             }
             return View("Index");
-
         }
 
         [HttpPost] //Add a person to existing list
         public ActionResult AddPerCapitaByAjax(string FirstName, string LastName, string MobilePhoneNumber, string City)
         {
-
             if (ModelState.IsValid)
             {
-                Session["WrongMobilenumber"] = "";
+                bool addPost = true;
+                Session["WrongUserInput"] = "";
                 PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
-                AddAPerson.FirstName = FirstName;
-                AddAPerson.LastName = LastName;
-                AddAPerson.MobilePhoneNumber = CheckMobilePhoneNumber(MobilePhoneNumber);
+                if (PerCapitaByAjax.CheckNameInput(FirstName)) //if first name is entierly of letters then add it
+                {
+                    AddAPerson.FirstName = FirstName;
+                }
+                else
+                {
+                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + FirstName + " as a first name which is deemed to not be a first name.";
+                    addPost = false;
+                }
+                if (PerCapitaByAjax.CheckNameInput(LastName))//if last name is entierly of letters then add it
+                {
+                    AddAPerson.LastName = LastName;
+                }
+                else
+                {
+                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + LastName + " as a last name which is deemed to not be a last name.";
+                    addPost = false;
+                }
+                AddAPerson.MobilePhoneNumber = CheckMobilePhoneNumber(MobilePhoneNumber); //check if mobile number is numbers or separators.
                 if (AddAPerson.MobilePhoneNumber == "Letters instead of Numbers")
                 {
                     Session["WrongMobilenumber"] = "You have typed a incorrect mobilenumber.";
                     AddAPerson.MobilePhoneNumber = "";
+                    addPost = false;
                 }
-                AddAPerson.City = City;
-
-                PerCapitaByAjax.peopleList.Add(AddAPerson);
+                if (PerCapitaByAjax.CheckNameInput(City))//if city is entierly of letters then add it
+                {
+                    AddAPerson.City = City;
+                }
+                else
+                {
+                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + City + " as a city which is deemed to not be a city name.";
+                    addPost = false;
+                }
+                if (addPost == true)//if all entered data is correct then add the data to list/database
+                {
+                    PerCapitaByAjax.peopleList.Add(AddAPerson);
+                }
                 return View("Index");
             }
             else
             {
-                Session["WrongMobilenumber"] = "You have entered one or more incorrect details.";
+                Session["WrongUserInput"] = "You have entered one or more incorrect details.";
                 return View("Index");
             }
         }
@@ -101,7 +121,7 @@ namespace ChristiansWebPage.Controllers
         /// <summary>
         /// Function that handles entered letters as a mobile number
         /// </summary>
-        /// <param name="MobilePhoneNumber is the input string from user"></param>
+        /// <paramname></param>
         /// <returns></returns>
         private string CheckMobilePhoneNumber(string MobilePhoneNumber)
         {

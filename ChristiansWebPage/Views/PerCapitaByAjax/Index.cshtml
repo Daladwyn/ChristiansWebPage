@@ -12,14 +12,10 @@
         <li class="col-md-2">@Html.DisplayNameFor(Modelitem => Model.City)</li>
         <li class="col-md-2"></li>
         <li class="rowBreak"></li>
-
         @Html.Action("PeopleRowRender", "PerCapitaByAjax")
-
     </ul>
-
 </div>
 <div class="col-md-6">
-
     @using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))
     {
         <h3>What would you like to sort on:</h3>
@@ -31,7 +27,7 @@
         </select>
         <input type="submit" name="" value="Sort" />
     }
-
+  
     @using (Html.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
     {
         <h3>What are you looking for:</h3>
@@ -45,9 +41,9 @@
     {
         <h3>Here you can add more persons:</h3>
         <br />
-        if (Convert.ToString(Session["WrongMobilenumber"]) != "")
+        if (Convert.ToString(Session["WrongUserInput"]) != "")
         {
-            <h1>@Session["WrongMobilenumber"]</h1>
+            <h1>@Session["WrongUserInput"]</h1>
             <br />
         }
         <table>
@@ -72,4 +68,4 @@
             </tr>
         </table>
     }
-    </div>
+</div>

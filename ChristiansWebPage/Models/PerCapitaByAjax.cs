@@ -53,28 +53,27 @@ namespace ChristiansWebPage.Models
         public static List<PerCapitaByAjax> FilterAPeopleList(string searchString)
         {
             List<PerCapitaByAjax> newPeopleList = new List<PerCapitaByAjax>();
-            if (searchString == "")
+            if (searchString == "") //if no filter is applied, restore the list from backup 
             {
                 peopleList = backupOfPeopleList;
             }
-            else
+            else // search trou the list/database of the specified searchstring
             {
                 for (int i = 0; i < peopleList.Count; i++)
                 {
                     searchString = searchString.ToLower();
-                    if (peopleList[i].FirstName.ToLower() == searchString)
+                    if (peopleList[i].FirstName.ToLower() == searchString) // Search in first name
                     {
                         newPeopleList.Add(peopleList[i]);
                     }
-                    else if (peopleList[i].LastName.ToLower() == searchString)
+                    else if (peopleList[i].LastName.ToLower() == searchString) //Search in last name
                     {
                         newPeopleList.Add(peopleList[i]);
                     }
-                    else if (peopleList[i].City.ToLower() == searchString)
+                    else if (peopleList[i].City.ToLower() == searchString) //Search in City
                     {
                         newPeopleList.Add(peopleList[i]);
                     }
-
                 }
                 peopleList = newPeopleList;
             }
@@ -97,26 +96,53 @@ namespace ChristiansWebPage.Models
             return peopleList;
         }
 
-        public static string CheckNameInput(string NameInput)
+        public static bool CheckNameInput(string NameInput)
         {
             char input;
-            bool letter = false, number = false;
-            string checkedName = "";
-            for(int i =0; i < NameInput.Length; i++)
+            bool isLetter = false, isOtherChar = false, isValid = false;
+            for (int i = 0; i < NameInput.Length; i++)
             {
                 input = Convert.ToChar(NameInput[i]);
-                if(char.IsLetter(input))
+                if (char.IsLetter(input)) //if the typed data is a letter
                 {
-                    letter = true;
-                } else if(char.IsDigit(input))
+                    isLetter = true;
+                }
+                else //if typed data is any other
                 {
-                    number = true;
+                    isOtherChar = true;
                 }
             }
+            isValid = ((isLetter == true) && (isOtherChar == false)) ? true : false;//only if there is letters will this return true
+            return isValid;
+        }
 
-
-
-            return checkedName; 
+        /// <summary>
+        /// Function that handles entered letters as a mobile number
+        /// </summary>
+        /// <param name="MobilePhoneNumber is the input string from user"></param>
+        /// <returns></returns>
+        public string CheckMobilePhoneNumber(string MobilePhoneNumber)
+        {
+            char cMPND;//checkMobilePhoneNumberDigit
+            string checkedMobilePhoneNumber = "";
+            for (int i = 0; i < MobilePhoneNumber.Length; i++)
+            {
+                cMPND = MobilePhoneNumber[i];
+                if (Char.IsDigit(cMPND))//if checkMobilePhoneNumberDigit is a digit
+                {
+                    checkedMobilePhoneNumber += cMPND;
+                }
+                else if (Char.IsLetter(cMPND)) //if checkMobilePhoneNumberDigit is a letter
+                {
+                    checkedMobilePhoneNumber = "Letters instead of Numbers";
+                }
+                else if (Char.IsSeparator(cMPND))//if checkMobilePhoneNumberDigit is a separator
+                {
+                    checkedMobilePhoneNumber += cMPND;
+                }
+                else if (Char.IsWhiteSpace(cMPND)) { } //if checkMobilePhoneNumberDigit is a whiteSpace
+            }
+            return checkedMobilePhoneNumber;
         }
     }
 }

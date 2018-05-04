@@ -2,7 +2,7 @@
 
 @foreach (ChristiansWebPage.Models.PerCapitaByAjax item in Model)
 {
-<li class="row"></li>
+    <li class="row"></li>
     <li id="@item.Id" class="col-md-3">@Html.DisplayFor(Modelitem => item.FirstName)</li>
     <li class="col-md-3">@Html.DisplayFor(Modelitem => item.LastName)</li>
     <li class="col-md-2">@Html.DisplayFor(Modelitem => item.MobilePhoneNumber)</li>
@@ -11,9 +11,7 @@
         @{var routeValue = new RouteValueDictionary();
             routeValue.Add("id", item.Id);}
         @Html.ActionLink("Delete", "DeletePerCapitaByAjax", routeValue)
-
     </li>
     <li class="rowBreak"></li>
-    
 }
 
