@@ -13,7 +13,7 @@
         <li class="col-md-2"></li>
         <li class="rowBreak"></li>
         @Html.Action("PeopleRowRender", "PerCapitaByAjax")
-    </ul>
+    </ul id="endOfPeopleList">
 </div>
 <div class="col-md-6">
     @using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))

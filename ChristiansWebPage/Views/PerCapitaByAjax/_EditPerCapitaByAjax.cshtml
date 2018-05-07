@@ -1,0 +1,36 @@
+﻿@model ChristiansWebPage.Models.PerCapitaByAjax
+
+<li class="row"></li>
+<li id="@Model.Id" class="col-md-2">@Html.DisplayFor(Modelitem => Model.FirstName)</li>
+<li class="col-md-2">@Html.DisplayFor(Modelitem => Model.LastName)</li>
+<li class="col-md-2">@Html.DisplayFor(Modelitem => Model.MobilePhoneNumber)</li>
+<li class="col-md-2">@Html.DisplayFor(Modelitem => Model.City)</li>
+<li class="col-md-2">
+
+
+
+
+    @{var routeValue = new RouteValueDictionary();
+        routeValue.Add("id", Model.Id);}
+    @Html.ActionLink("Cancel", "Index", routeValue)
+</li>
+<li class="col-md-2">
+
+    @using (Ajax.BeginForm("UpdatePerCapitaByAjax",
+              ajaxOptions: new AjaxOptions
+              {
+                  InsertionMode = InsertionMode.InsertBefore,
+                  UpdateTargetId = "endOfPeopleList",
+              }
+              ))
+    {
+        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax();
+        @Html.EditorFor(Model => editedPerson.FirstName)
+        @Html.EditorFor(Model => editedPerson.LastName)
+        @Html.EditorFor(Model => editedPerson.MobilePhoneNumber)
+        @Html.EditorFor(Model => editedPerson.City)
+
+        <input type="submit" value="Update" />
+    }
+
+<li class="rowBreak"></li>

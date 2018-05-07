@@ -118,6 +118,35 @@ namespace ChristiansWebPage.Controllers
             return PartialView("_TableRowOfPeople", PerCapitaByAjax.peopleList);
         }
 
+        public ActionResult EditPerCapitaByAjax(int id)
+        {
+            PerCapitaByAjax editPerson = new PerCapitaByAjax();
+            for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
+            {
+                if (PerCapitaByAjax.peopleList[i].Id == id)
+                {
+                    editPerson = PerCapitaByAjax.peopleList[i];
+                }
+            }
+            return PartialView("_EditPerCapitaByAjax", editPerson);
+
+        }
+
+        public ActionResult UpdatePerCapitaByAjax(PerCapitaByAjax person)
+        {
+            for(int i =0; i < PerCapitaByAjax.peopleList.Count; i++)
+            {
+                if(PerCapitaByAjax.peopleList[i].Id == person.Id)
+                {
+                    PerCapitaByAjax.peopleList[i].FirstName = person.FirstName;
+                    PerCapitaByAjax.peopleList[i].LastName = person.LastName;
+                    PerCapitaByAjax.peopleList[i].MobilePhoneNumber = person.MobilePhoneNumber;
+                    PerCapitaByAjax.peopleList[i].City = person.City;
+                }
+            }
+            return PartialView("_TableRowOfPeople", PerCapitaByAjax.peopleList);
+        }
+
         /// <summary>
         /// Function that handles entered letters as a mobile number
         /// </summary>
