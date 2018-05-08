@@ -113,38 +113,40 @@ namespace ChristiansWebPage.Controllers
             }
         }
 
-        public ActionResult PeopleRowRender()
+        public ActionResult PeopleRowRender(int id)
         {
-            return PartialView("_TableRowOfPeople", PerCapitaByAjax.peopleList);
+            PerCapitaByAjax personToList = PerCapitaByAjax.peopleList.SingleOrDefault(Item => Item.Id == id);
+            return PartialView("_TableRowOfPeople", personToList);
         }
 
         public ActionResult EditPerCapitaByAjax(int id)
         {
-            PerCapitaByAjax editPerson = new PerCapitaByAjax();
-            for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
-            {
-                if (PerCapitaByAjax.peopleList[i].Id == id)
-                {
-                    editPerson = PerCapitaByAjax.peopleList[i];
-                }
-            }
-            return PartialView("_EditPerCapitaByAjax", editPerson);
+            PerCapitaByAjax personToList = PerCapitaByAjax.peopleList.SingleOrDefault(Item => Item.Id == id);
+
+            return PartialView("_EditPerCapitaByAjax", personToList);
 
         }
 
-        public ActionResult UpdatePerCapitaByAjax(PerCapitaByAjax person)
+        public ActionResult UpdatePerCapitaByAjax(PerCapitaByAjax editedPerson)
         {
-            for(int i =0; i < PerCapitaByAjax.peopleList.Count; i++)
+            if (ModelState.IsValid)
             {
-                if(PerCapitaByAjax.peopleList[i].Id == person.Id)
+                for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
                 {
-                    PerCapitaByAjax.peopleList[i].FirstName = person.FirstName;
-                    PerCapitaByAjax.peopleList[i].LastName = person.LastName;
-                    PerCapitaByAjax.peopleList[i].MobilePhoneNumber = person.MobilePhoneNumber;
-                    PerCapitaByAjax.peopleList[i].City = person.City;
+                    if (PerCapitaByAjax.peopleList[i].Id == editedPerson.Id)
+                    {
+                        PerCapitaByAjax.peopleList[i].FirstName = editedPerson.FirstName;
+                        PerCapitaByAjax.peopleList[i].LastName = editedPerson.LastName;
+                        PerCapitaByAjax.peopleList[i].MobilePhoneNumber = editedPerson.MobilePhoneNumber;
+                        PerCapitaByAjax.peopleList[i].City = editedPerson.City;
+                    }
                 }
+                return PartialView("_TableRowOfPeople", editedPerson);
             }
-            return PartialView("_TableRowOfPeople", PerCapitaByAjax.peopleList);
+            else
+            {
+                return new HttpStatusCodeResult(400);
+            }
         }
 
         /// <summary>

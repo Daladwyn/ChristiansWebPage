@@ -6,14 +6,19 @@
 <h2>List of Random People</h2>
 <div class="col-md-6">
     <ul>
-        <li class="col-md-3">@Html.DisplayNameFor(Modelitem => Modelitem.FirstName)</li>
+        <li class="col-md-3">@Html.DisplayNameFor(Modelitem => Model.FirstName)</li>
         <li class="col-md-3">@Html.DisplayNameFor(Modelitem => Model.LastName)</li>
         <li class="col-md-2">@Html.DisplayNameFor(Modelitem => Model.MobilePhoneNumber)</li>
         <li class="col-md-2">@Html.DisplayNameFor(Modelitem => Model.City)</li>
         <li class="col-md-2"></li>
         <li class="rowBreak"></li>
-        @Html.Action("PeopleRowRender", "PerCapitaByAjax")
-    </ul id="endOfPeopleList">
+        @foreach (ChristiansWebPage.Models.PerCapitaByAjax item in ChristiansWebPage.Models.PerCapitaByAjax.peopleList)
+        {
+            <li class="row"></li>
+            @Html.Action("PeopleRowRender", "PerCapitaByAjax", new { id = item.Id });
+            <li class="rowBreak"></li>
+        }
+    </ul>
 </div>
 <div class="col-md-6">
     @using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))
@@ -27,7 +32,7 @@
         </select>
         <input type="submit" name="" value="Sort" />
     }
-  
+
     @using (Html.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
     {
         <h3>What are you looking for:</h3>

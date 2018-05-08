@@ -141,10 +141,10 @@
     <Content Include="Views\Home\GuessingGame.cshtml" />
     <Content Include="Views\PerCapita\Index.cshtml" />
     <Content Include="Views\PerCapitaByAjax\Index.cshtml" />
-    <Content Include="Views\PerCapitaByAjax\_TableRowOfPeople.cshtml" />
+    <Content Include="Views\Shared\_TableRowOfPeople.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\PerCapitaByAjax\_EditPerCapitaByAjax.cshtml" />
+    <Content Include="Views\Shared\_EditPerCapitaByAjax.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

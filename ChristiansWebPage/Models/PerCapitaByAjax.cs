@@ -19,8 +19,10 @@ namespace ChristiansWebPage.Models
         [Required]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
+        [Required]
         [Display(Name = "Mobile")]
         public string MobilePhoneNumber { get; set; }
+        [Required]
         public string City { get; set; }
 
         public PerCapitaByAjax()

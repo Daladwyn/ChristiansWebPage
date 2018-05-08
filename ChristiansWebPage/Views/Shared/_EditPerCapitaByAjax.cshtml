@@ -1,0 +1,62 @@
+﻿@model ChristiansWebPage.Models.PerCapitaByAjax
+
+
+<ul id="@("Person" + Model.Id)">
+    <li class="col-md-3">@Html.DisplayFor(Modelitem => Model.FirstName)</li>
+    <li class="col-md-3">@Html.DisplayFor(Modelitem => Model.LastName)</li>
+    <li class="col-md-2">@Html.DisplayFor(Modelitem => Model.MobilePhoneNumber)</li>
+    <li class="col-md-2">@Html.DisplayFor(Modelitem => Model.City)</li>
+    <li class="col-md-2">
+
+        @{var routeValue = new RouteValueDictionary();
+            routeValue.Add("id", Model.Id);}
+
+    </li>
+    <li class="rowBreak"></li>
+    
+    @using (Ajax.BeginForm("UpdatePerCapitaByAjax",
+      ajaxOptions: new AjaxOptions
+      {
+          InsertionMode = InsertionMode.ReplaceWith,
+          UpdateTargetId = "Person" + Model.Id,
+      }
+      ))
+    {
+
+        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax();
+        editedPerson.Id = Model.Id;
+
+        <li class="row"></li>
+        <li class="col-md-3">First Name: </li>
+        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.FirstName)    </li>
+        <li class="col-md-3"></li>
+        <li class="rowBreak"></li>
+        <li class="row"></li>
+        <li class="col-md-3">Last Name: </li>
+        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.LastName) </li>
+        <li class="col-md-3"></li>
+        <li class="rowBreak"></li>
+        <li class="row"></li>
+        <li class="col-md-3">MobileNumber:</li>
+        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.MobilePhoneNumber) </li>
+        <li class="col-md-3"></li>
+        <li class="rowBreak"></li>
+        <li class="row"></li>
+        <li class="col-md-3">City:</li>
+        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.City) </li>
+        <li class="col-md-3"></li>
+        <li class="rowBreak"></li>
+        <li class="row"></li>
+        <li><input type="submit" value="Update" /> </li>
+    }
+
+    @Ajax.ActionLink("Cancel", "PeopleRowRender",
+                                                    ajaxOptions: new AjaxOptions
+                                                    {
+                                                        InsertionMode = InsertionMode.ReplaceWith,
+                                                        UpdateTargetId = "Person" + Model.Id,
+                                                    },
+                                                    routeValues: routeValue
+                                                         )
+
+</ul>
