@@ -127,7 +127,7 @@ namespace ChristiansWebPage.Controllers
 
         }
 
-        public ActionResult UpdatePerCapitaByAjax(PerCapitaByAjax editedPerson)
+        public ActionResult UpdatePerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)
         {
             if (ModelState.IsValid)
             {

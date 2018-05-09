@@ -10,53 +10,36 @@
 
         @{var routeValue = new RouteValueDictionary();
             routeValue.Add("id", Model.Id);}
-
+        @{int id = Model.Id}
     </li>
     <li class="rowBreak"></li>
-    
-    @using (Ajax.BeginForm("UpdatePerCapitaByAjax",
-      ajaxOptions: new AjaxOptions
-      {
-          InsertionMode = InsertionMode.ReplaceWith,
-          UpdateTargetId = "Person" + Model.Id,
-      }
-      ))
-    {
-
-        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax();
-        editedPerson.Id = Model.Id;
-
-        <li class="row"></li>
-        <li class="col-md-3">First Name: </li>
-        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.FirstName)    </li>
-        <li class="col-md-3"></li>
-        <li class="rowBreak"></li>
-        <li class="row"></li>
-        <li class="col-md-3">Last Name: </li>
-        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.LastName) </li>
-        <li class="col-md-3"></li>
-        <li class="rowBreak"></li>
-        <li class="row"></li>
-        <li class="col-md-3">MobileNumber:</li>
-        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.MobilePhoneNumber) </li>
-        <li class="col-md-3"></li>
-        <li class="rowBreak"></li>
-        <li class="row"></li>
-        <li class="col-md-3">City:</li>
-        <li class="col-md-6">@Html.EditorFor(Model => editedPerson.City) </li>
-        <li class="col-md-3"></li>
-        <li class="rowBreak"></li>
-        <li class="row"></li>
-        <li><input type="submit" value="Update" /> </li>
-    }
-
-    @Ajax.ActionLink("Cancel", "PeopleRowRender",
-                                                    ajaxOptions: new AjaxOptions
-                                                    {
-                                                        InsertionMode = InsertionMode.ReplaceWith,
-                                                        UpdateTargetId = "Person" + Model.Id,
-                                                    },
-                                                    routeValues: routeValue
-                                                         )
-
 </ul>
+@using (Ajax.BeginForm(actionName: "UpdatePerCapitaByAjax", controllerName:"PerCapitaByAjax",
+    ajaxOptions :new ajaxOptions
+{
+UpdateTargetId = "person + @Model.Id,
+InsertionMode = InsertionMode.Replacewith
+}))
+
+
+}
+
+
+@Ajax.Hidden
+@Html.EditorFor(model => model.FirstName)
+@Html.EditorFor(model => model.LastName)
+@Html.EditorFor(model => model.MobilePhoneNumber)
+@Html.EditorFor(model => model.City)
+    <input type="submit" value="Update" />
+
+
+}
+
+
+@Ajax.ActionLink("Cancel", "PeopleRowRender",
+ajaxOptions: new AjaxOptions
+{
+    InsertionMode = InsertionMode.ReplaceWith,
+    UpdateTargetId = "Person" + Model.Id,
+},
+ routeValues: routeValue)
