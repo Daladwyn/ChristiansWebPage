@@ -39,7 +39,7 @@ namespace ChristiansWebPage.Controllers
         public ActionResult FilterPerCapitaByAjax(string searchFilter)
         {
             PerCapitaByAjax.FilterAPeopleList(searchFilter);
-            return View("_TableRowOfPeople", PerCapitaByAjax.peopleList);
+            return PartialView("_TableRowOfPeople", PerCapitaByAjax.peopleList);
         }
 
         //This action removes the corresponding object in the data
@@ -64,6 +64,7 @@ namespace ChristiansWebPage.Controllers
                 bool addPost = true;
                 Session["WrongUserInput"] = "";
                 PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
+                AddAPerson.Id = editedPerson.Id;
                 if (PerCapitaByAjax.CheckNameInput(editedPerson.FirstName)) //if first name is entierly of letters then add it
                 {
                     AddAPerson.FirstName = editedPerson.FirstName;
@@ -126,6 +127,8 @@ namespace ChristiansWebPage.Controllers
 
         public ActionResult UpdatePerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)
         {
+            PerCapitaByAjax UpdateAPerson = new PerCapitaByAjax();
+            UpdateAPerson.Id = editedPerson.Id;
             if (ModelState.IsValid)
             {
                 for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
