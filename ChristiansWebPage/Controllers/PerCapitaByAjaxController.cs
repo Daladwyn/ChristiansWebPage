@@ -39,7 +39,7 @@ namespace ChristiansWebPage.Controllers
         public ActionResult FilterPerCapitaByAjax(string searchFilter)
         {
             PerCapitaByAjax.FilterAPeopleList(searchFilter);
-            return View("Index");
+            return View("_TableRowOfPeople", PerCapitaByAjax.peopleList);
         }
 
         //This action removes the corresponding object in the data
@@ -48,63 +48,61 @@ namespace ChristiansWebPage.Controllers
         {
             for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
             {
-                PerCapitaByAjax deleteAPerson = new PerCapitaByAjax();
-                deleteAPerson = PerCapitaByAjax.peopleList[i];
-                if (deleteAPerson.Id == id)
+                if (PerCapitaByAjax.peopleList[i].Id == id)
                 {
-                    PerCapitaByAjax.peopleList.Remove(deleteAPerson);
+                    PerCapitaByAjax.peopleList.Remove(PerCapitaByAjax.peopleList[i]);
                 }
             }
-            return View("Index");
+            return PartialView("_DeletedRow");
         }
 
         [HttpPost] //Add a person to existing list
-        public ActionResult AddPerCapitaByAjax(string FirstName, string LastName, string MobilePhoneNumber, string City)
+        public ActionResult AddPerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)
         {
             if (ModelState.IsValid)
             {
                 bool addPost = true;
                 Session["WrongUserInput"] = "";
                 PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
-                if (PerCapitaByAjax.CheckNameInput(FirstName)) //if first name is entierly of letters then add it
+                if (PerCapitaByAjax.CheckNameInput(editedPerson.FirstName)) //if first name is entierly of letters then add it
                 {
-                    AddAPerson.FirstName = FirstName;
+                    AddAPerson.FirstName = editedPerson.FirstName;
                 }
                 else
                 {
-                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + FirstName + " as a first name which is deemed to not be a first name.";
+                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + editedPerson.FirstName + " as a first name which is deemed to not be a first name.";
                     addPost = false;
                 }
-                if (PerCapitaByAjax.CheckNameInput(LastName))//if last name is entierly of letters then add it
+                if (PerCapitaByAjax.CheckNameInput(editedPerson.LastName))//if last name is entierly of letters then add it
                 {
-                    AddAPerson.LastName = LastName;
+                    AddAPerson.LastName = editedPerson.LastName;
                 }
                 else
                 {
-                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + LastName + " as a last name which is deemed to not be a last name.";
+                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + editedPerson.LastName + " as a last name which is deemed to not be a last name.";
                     addPost = false;
                 }
-                AddAPerson.MobilePhoneNumber = CheckMobilePhoneNumber(MobilePhoneNumber); //check if mobile number is numbers or separators.
+                AddAPerson.MobilePhoneNumber = CheckMobilePhoneNumber(editedPerson.MobilePhoneNumber); //check if mobile number is numbers or separators.
                 if (AddAPerson.MobilePhoneNumber == "Letters instead of Numbers")
                 {
                     Session["WrongMobilenumber"] = "You have typed a incorrect mobilenumber.";
                     AddAPerson.MobilePhoneNumber = "";
                     addPost = false;
                 }
-                if (PerCapitaByAjax.CheckNameInput(City))//if city is entierly of letters then add it
+                if (PerCapitaByAjax.CheckNameInput(editedPerson.City))//if city is entierly of letters then add it
                 {
-                    AddAPerson.City = City;
+                    AddAPerson.City = editedPerson.City;
                 }
                 else
                 {
-                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + City + " as a city which is deemed to not be a city name.";
+                    Session["WrongUserInput"] = Session["WrongUserInput"] + "You typed " + editedPerson.City + " as a city which is deemed to not be a city name.";
                     addPost = false;
                 }
                 if (addPost == true)//if all entered data is correct then add the data to list/database
                 {
                     PerCapitaByAjax.peopleList.Add(AddAPerson);
                 }
-                return View("Index");
+                return PartialView("_TableRowOfPeople", AddAPerson);
             }
             else
             {
@@ -119,12 +117,11 @@ namespace ChristiansWebPage.Controllers
             return PartialView("_TableRowOfPeople", personToList);
         }
 
+
         public ActionResult EditPerCapitaByAjax(int id)
         {
             PerCapitaByAjax personToList = PerCapitaByAjax.peopleList.SingleOrDefault(Item => Item.Id == id);
-
             return PartialView("_EditPerCapitaByAjax", personToList);
-
         }
 
         public ActionResult UpdatePerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)

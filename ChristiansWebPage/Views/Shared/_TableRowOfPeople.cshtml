@@ -1,15 +1,21 @@
 ﻿@model ChristiansWebPage.Models.PerCapitaByAjax
-
-
-<ul id="@("Person"+ Model.Id)">
-    <li class="col-md-3"> @Html.DisplayFor(Modelitem => Model.FirstName)</li>
+<ul id="@("Person" + Model.Id)">
+    <li class="col-md-3">@Html.DisplayFor(Modelitem => Model.FirstName)</li>
     <li class="col-md-3">@Html.DisplayFor(Modelitem => Model.LastName)</li>
     <li class="col-md-2">@Html.DisplayFor(Modelitem => Model.MobilePhoneNumber)</li>
     <li class="col-md-2">@Html.DisplayFor(Modelitem => Model.City)</li>
     <li class="col-md-1">
         @{var routeValue = new RouteValueDictionary();
             routeValue.Add("id", Model.Id);}
-        @Html.ActionLink("Delete", "DeletePerCapitaByAjax", routeValue)
+
+        @Ajax.ActionLink("Delete", "DeletePerCapitaByAjax",
+       ajaxOptions: new AjaxOptions
+       {
+           InsertionMode = InsertionMode.ReplaceWith,
+           UpdateTargetId = "rowId" + Model.Id,
+       },
+       routeValues: routeValue
+      )
     </li>
     <li class="col-md-1">
         @Ajax.ActionLink("Edit", "EditPerCapitaByAjax",
@@ -19,5 +25,6 @@
                                UpdateTargetId = "Person" + Model.Id,
                            },
                            routeValues: routeValue)
+    <li class="rowBreak"></li>
     </li>
 </ul> 

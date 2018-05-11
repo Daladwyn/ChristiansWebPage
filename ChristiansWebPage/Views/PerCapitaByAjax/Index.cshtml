@@ -1,10 +1,11 @@
 ﻿@model ChristiansWebPage.Models.PerCapitaByAjax
 @{
     ViewBag.Title = "Index";
+    
 }
 
 <h2>List of Random People</h2>
-<div class="col-md-6">
+<div class="col-md-9">
     <ul>
         <li class="col-md-3">@Html.DisplayNameFor(Modelitem => Model.FirstName)</li>
         <li class="col-md-3">@Html.DisplayNameFor(Modelitem => Model.LastName)</li>
@@ -14,13 +15,15 @@
         <li class="rowBreak"></li>
         @foreach (ChristiansWebPage.Models.PerCapitaByAjax item in ChristiansWebPage.Models.PerCapitaByAjax.peopleList)
         {
-            <li class="row"></li>
-            @Html.Action("PeopleRowRender", "PerCapitaByAjax", new { id = item.Id });
-            <li class="rowBreak"></li>
+            <li class="row" id="@("rowId" + item.Id)">
+                @Html.Action("PeopleRowRender", "PerCapitaByAjax", new { id = item.Id })
+            </li>
+
         }
+        <li id="EndOfPeopleList"></li>
     </ul>
 </div>
-<div class="col-md-6">
+<div class="col-md-3">
     @using (Html.BeginForm("SortAPeopleList", "PerCapitaByAjax", FormMethod.Post))
     {
         <h3>What would you like to sort on:</h3>
@@ -33,16 +36,36 @@
         <input type="submit" name="" value="Sort" />
     }
 
-    @using (Html.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
+    @*  @using (Html.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
+        {
+            <h3>What are you looking for:</h3>
+            <br />
+            <p>To remove the filter, search again without any word.</p>
+            <input type="text" name="searchFilter" value="" />
+            <input type="submit" name="" value="Search" />
+        }*@
+
+    <h3>What are you looking for:</h3>
+    <br />
+    <p>To remove the filter, search again without any word.</p>
+
+    @using (Ajax.BeginForm("FilterPerCapitaByAjax", "PerCapitaByAjax",
+    ajaxOptions: new AjaxOptions
     {
-        <h3>What are you looking for:</h3>
-        <br />
-        <p>To remove the filter, search again without any word.</p>
+        InsertionMode = InsertionMode.InsertBefore,
+        UpdateTargetId = "EndOfPeopleList",
+    }))
+    {
         <input type="text" name="searchFilter" value="" />
         <input type="submit" name="" value="Search" />
     }
 
-    @using (Html.BeginForm("AddPerCapitaByAjax", "PerCapitaByAjax", FormMethod.Post))
+
+    @using (Ajax.BeginForm("AddPerCapitaByAjax", "PerCapitaByAjax",
+        ajaxOptions:new AjaxOptions {
+            InsertionMode = InsertionMode.InsertBefore,
+            UpdateTargetId = "EndOfPeopleList"
+        }))
     {
         <h3>Here you can add more persons:</h3>
         <br />

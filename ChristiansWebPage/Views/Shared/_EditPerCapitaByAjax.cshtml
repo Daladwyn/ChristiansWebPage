@@ -1,45 +1,39 @@
 ﻿@model ChristiansWebPage.Models.PerCapitaByAjax
-
-
 <ul id="@("Person" + Model.Id)">
     <li class="col-md-3">@Html.DisplayFor(Modelitem => Model.FirstName)</li>
     <li class="col-md-3">@Html.DisplayFor(Modelitem => Model.LastName)</li>
     <li class="col-md-2">@Html.DisplayFor(Modelitem => Model.MobilePhoneNumber)</li>
     <li class="col-md-2">@Html.DisplayFor(Modelitem => Model.City)</li>
     <li class="col-md-2">
-
         @{var routeValue = new RouteValueDictionary();
             routeValue.Add("id", Model.Id);}
-        @{int id = Model.Id}
     </li>
     <li class="rowBreak"></li>
+
+
+    @using (Ajax.BeginForm("UpdatePerCapitaByAjax", "PerCapitaByAjax",
+    ajaxOptions: new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        UpdateTargetId = "Person" + Model.Id,
+    },
+    routeValues: routeValue))
+    {
+        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax(Model.Id);
+        @Html.EditorFor(Model => editedPerson.FirstName)
+        @Html.EditorFor(Model => editedPerson.LastName)
+        @Html.EditorFor(Model => editedPerson.MobilePhoneNumber)
+        @Html.EditorFor(Model => editedPerson.City)
+        @Html.HiddenFor(Model => Model.Id)
+        <input type="submit" value="Update" />
+    }
+
+    @Ajax.ActionLink("Cancel", "PeopleRowRender",
+    ajaxOptions: new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        UpdateTargetId = "Person" + Model.Id,
+    },
+     routeValues: routeValue)
+    <li class="rowBreak"></li>
 </ul>
-@using (Ajax.BeginForm(actionName: "UpdatePerCapitaByAjax", controllerName:"PerCapitaByAjax",
-    ajaxOptions :new ajaxOptions
-{
-UpdateTargetId = "person + @Model.Id,
-InsertionMode = InsertionMode.Replacewith
-}))
-
-
-}
-
-
-@Ajax.Hidden
-@Html.EditorFor(model => model.FirstName)
-@Html.EditorFor(model => model.LastName)
-@Html.EditorFor(model => model.MobilePhoneNumber)
-@Html.EditorFor(model => model.City)
-    <input type="submit" value="Update" />
-
-
-}
-
-
-@Ajax.ActionLink("Cancel", "PeopleRowRender",
-ajaxOptions: new AjaxOptions
-{
-    InsertionMode = InsertionMode.ReplaceWith,
-    UpdateTargetId = "Person" + Model.Id,
-},
- routeValues: routeValue)

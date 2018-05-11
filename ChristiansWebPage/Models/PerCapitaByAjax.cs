@@ -25,10 +25,9 @@ namespace ChristiansWebPage.Models
         [Required]
         public string City { get; set; }
 
-        public PerCapitaByAjax()
-        {
-            Id = IdCount++;
-        }
+        public PerCapitaByAjax() { Id = IdCount++; }
+
+        public PerCapitaByAjax(int id) : this() { Id = id; }
 
         static PerCapitaByAjax ppl1 = new PerCapitaByAjax { FirstName = "Erik", LastName = "Persson", MobilePhoneNumber = "0701234567", City = "Stockholm" };
         static PerCapitaByAjax ppl2 = new PerCapitaByAjax { FirstName = "Pär", LastName = "Johansson", MobilePhoneNumber = "0701234567", City = "Stockholm" };
@@ -64,22 +63,22 @@ namespace ChristiansWebPage.Models
                 for (int i = 0; i < peopleList.Count; i++)
                 {
                     searchString = searchString.ToLower();
-                    if (peopleList[i].FirstName.ToLower() == searchString) // Search in first name
+                    if (peopleList[i].FirstName.ToLower().Contains(searchString)) // Search in first name
                     {
                         newPeopleList.Add(peopleList[i]);
                     }
-                    else if (peopleList[i].LastName.ToLower() == searchString) //Search in last name
+                    else if (peopleList[i].LastName.ToLower().Contains(searchString)) //Search in last name
                     {
                         newPeopleList.Add(peopleList[i]);
                     }
-                    else if (peopleList[i].City.ToLower() == searchString) //Search in City
+                    else if (peopleList[i].City.ToLower().Contains(searchString)) //Search in City
                     {
                         newPeopleList.Add(peopleList[i]);
                     }
                 }
                 peopleList = newPeopleList;
             }
-            return newPeopleList;
+            return peopleList;
         }
 
         public static List<PerCapitaByAjax> SortAPeopleListOnFirstName()
