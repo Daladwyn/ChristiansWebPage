@@ -125,14 +125,15 @@ namespace ChristiansWebPage.Controllers
             return PartialView("_EditPerCapitaByAjax", personToList);
         }
 
-        public ActionResult UpdatePerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)
+        public ActionResult UpdatePerCapitaByAjax(PerCapitaByAjax editedPerson)
         {
-            PerCapitaByAjax UpdateAPerson = new PerCapitaByAjax();
+            PerCapitaByAjax UpdateAPerson = new PerCapitaByAjax(1);
             UpdateAPerson.Id = editedPerson.Id;
             if (ModelState.IsValid)
             {
                 for (int i = 0; i < PerCapitaByAjax.peopleList.Count; i++)
-                {
+
+
                     if (PerCapitaByAjax.peopleList[i].Id == editedPerson.Id)
                     {
                         PerCapitaByAjax.peopleList[i].FirstName = editedPerson.FirstName;
@@ -140,9 +141,9 @@ namespace ChristiansWebPage.Controllers
                         PerCapitaByAjax.peopleList[i].MobilePhoneNumber = editedPerson.MobilePhoneNumber;
                         PerCapitaByAjax.peopleList[i].City = editedPerson.City;
                     }
-                }
-                return PartialView("_TableRowOfPeople", editedPerson);
+            return PartialView("_TableRowOfPeople", editedPerson);
             }
+            
             else
             {
                 return new HttpStatusCodeResult(400);

@@ -19,7 +19,8 @@
     },
     routeValues: routeValue))
     {
-        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax(Model.Id);
+        @*{int personId = 0;}  *@
+        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax(personId);
         @Html.EditorFor(Model => editedPerson.FirstName)
         @Html.EditorFor(Model => editedPerson.LastName)
         @Html.EditorFor(Model => editedPerson.MobilePhoneNumber)
