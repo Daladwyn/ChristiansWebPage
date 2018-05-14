@@ -19,16 +19,17 @@
     },
     routeValues: routeValue))
     {
-        @*{int personId = 0;}  *@
-        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax(personId);
+
+        ChristiansWebPage.Models.PerCapitaByAjax editedPerson = new ChristiansWebPage.Models.PerCapitaByAjax();
+        editedPerson.Id = Model.Id;
         @Html.EditorFor(Model => editedPerson.FirstName)
         @Html.EditorFor(Model => editedPerson.LastName)
         @Html.EditorFor(Model => editedPerson.MobilePhoneNumber)
         @Html.EditorFor(Model => editedPerson.City)
-        @Html.HiddenFor(Model => Model.Id)
+        @Html.HiddenFor(Model => editedPerson.Id)
         <input type="submit" value="Update" />
     }
-
+    <li class="md-col-12">Every textbox must have a value!</li>
     @Ajax.ActionLink("Cancel", "PeopleRowRender",
     ajaxOptions: new AjaxOptions
     {

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ChristiansWebPage.Models
 {
-    [Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")]
+    
     public class PerCapitaByAjax
     {
         static int IdCount = 0;

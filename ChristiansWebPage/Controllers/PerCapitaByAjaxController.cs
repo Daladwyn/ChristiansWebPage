@@ -57,14 +57,28 @@ namespace ChristiansWebPage.Controllers
         }
 
         [HttpPost] //Add a person to existing list
-        public ActionResult AddPerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)
+        public ActionResult AddPerCapitaByAjax([Bind(Include = "FirstName,LastName,MobilePhoneNumber,City")] PerCapitaByAjax editedPerson)
         {
             if (ModelState.IsValid)
             {
+
                 bool addPost = true;
                 Session["WrongUserInput"] = "";
                 PerCapitaByAjax AddAPerson = new PerCapitaByAjax();
-                AddAPerson.Id = editedPerson.Id;
+                for (int i = 0; i <= PerCapitaByAjax.peopleList.Count; i++)
+                {
+                    for (int y = 0; y < PerCapitaByAjax.peopleList.Count; y++)
+                    {
+                        if (PerCapitaByAjax.peopleList[y].Id == i) { }
+                        else
+                        {
+                            AddAPerson.Id = i;
+                            y = PerCapitaByAjax.peopleList.Count;
+                        }
+
+                    }
+                }
+
                 if (PerCapitaByAjax.CheckNameInput(editedPerson.FirstName)) //if first name is entierly of letters then add it
                 {
                     AddAPerson.FirstName = editedPerson.FirstName;
@@ -125,7 +139,7 @@ namespace ChristiansWebPage.Controllers
             return PartialView("_EditPerCapitaByAjax", personToList);
         }
 
-        public ActionResult UpdatePerCapitaByAjax(PerCapitaByAjax editedPerson)
+        public ActionResult UpdatePerCapitaByAjax([Bind(Include = "Id,FirstName,LastName,MobilePhoneNumber,City")]PerCapitaByAjax editedPerson)
         {
             PerCapitaByAjax UpdateAPerson = new PerCapitaByAjax(1);
             UpdateAPerson.Id = editedPerson.Id;
@@ -141,9 +155,9 @@ namespace ChristiansWebPage.Controllers
                         PerCapitaByAjax.peopleList[i].MobilePhoneNumber = editedPerson.MobilePhoneNumber;
                         PerCapitaByAjax.peopleList[i].City = editedPerson.City;
                     }
-            return PartialView("_TableRowOfPeople", editedPerson);
+                return PartialView("_TableRowOfPeople", editedPerson);
             }
-            
+
             else
             {
                 return new HttpStatusCodeResult(400);
